@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-especialista-heading" data-cy="EspecialistaCreateUpdateHeading">Create or edit a Especialista</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nombre">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="field_nombre" data-cy="nombre" formControlName="nombre" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_apellidos">Apellidos</label>
+          <input type="text" class="form-control" name="apellidos" id="field_apellidos" data-cy="apellidos" formControlName="apellidos" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_rut">Rut</label>
+          <input type="text" class="form-control" name="rut" id="field_rut" data-cy="rut" formControlName="rut" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fechaNacimiento">Fecha Nacimiento</label>
+          <div class="input-group">
+            <input
+              id="field_fechaNacimiento"
+              data-cy="fechaNacimiento"
+              type="text"
+              class="form-control"
+              name="fechaNacimiento"
+              ngbDatepicker
+              #fechaNacimientoDp="ngbDatepicker"
+              formControlName="fechaNacimiento"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_registroMedico">Registro Medico</label>
+          <input
+            type="text"
+            class="form-control"
+            name="registroMedico"
+            id="field_registroMedico"
+            data-cy="registroMedico"
+            formControlName="registroMedico"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_especialidad">Especialidad</label>
+          <select class="form-control" name="especialidad" formControlName="especialidad" id="field_especialidad" data-cy="especialidad">
+            <option [ngValue]="null"></option>
+            <option value="MEDICINA_GENERAL">MEDICINA_GENERAL</option>
+            <option value="LABORATORIO">LABORATORIO</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

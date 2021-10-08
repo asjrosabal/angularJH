@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="paciente">
+      <h2 data-cy="pacienteDetailsHeading"><span>Paciente</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ paciente.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ paciente.nombre }}</span>
+        </dd>
+        <dt><span>Apellidos</span></dt>
+        <dd>
+          <span>{{ paciente.apellidos }}</span>
+        </dd>
+        <dt><span>Rut</span></dt>
+        <dd>
+          <span>{{ paciente.rut }}</span>
+        </dd>
+        <dt><span>Fecha Nacimiento</span></dt>
+        <dd>
+          <span>{{ paciente.fechaNacimiento | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Rut</span></dt>
+        <dd>
+          <div *ngIf="paciente.rut">
+            <a [routerLink]="['/especialista', paciente.rut?.id, 'view']">{{ paciente.rut?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/paciente', paciente.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

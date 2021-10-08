@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="especialista">
+      <h2 data-cy="especialistaDetailsHeading"><span>Especialista</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ especialista.id }}</span>
+        </dd>
+        <dt><span>Nombre</span></dt>
+        <dd>
+          <span>{{ especialista.nombre }}</span>
+        </dd>
+        <dt><span>Apellidos</span></dt>
+        <dd>
+          <span>{{ especialista.apellidos }}</span>
+        </dd>
+        <dt><span>Rut</span></dt>
+        <dd>
+          <span>{{ especialista.rut }}</span>
+        </dd>
+        <dt><span>Fecha Nacimiento</span></dt>
+        <dd>
+          <span>{{ especialista.fechaNacimiento | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Registro Medico</span></dt>
+        <dd>
+          <span>{{ especialista.registroMedico }}</span>
+        </dd>
+        <dt><span>Especialidad</span></dt>
+        <dd>
+          <span>{{ especialista.especialidad }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/especialista', especialista.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

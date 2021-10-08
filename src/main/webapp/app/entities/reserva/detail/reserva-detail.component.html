@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="reserva">
+      <h2 data-cy="reservaDetailsHeading"><span>Reserva</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ reserva.id }}</span>
+        </dd>
+        <dt><span>Fecha</span></dt>
+        <dd>
+          <span>{{ reserva.fecha | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Hora</span></dt>
+        <dd>
+          <span>{{ reserva.hora | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Especialidad</span></dt>
+        <dd>
+          <span>{{ reserva.especialidad }}</span>
+        </dd>
+        <dt><span>Rut</span></dt>
+        <dd>
+          <div *ngIf="reserva.rut">
+            <a [routerLink]="['/paciente', reserva.rut?.id, 'view']">{{ reserva.rut?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/reserva', reserva.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

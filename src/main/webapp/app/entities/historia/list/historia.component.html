@@ -1,0 +1,90 @@
+<div>
+  <h2 id="page-heading" data-cy="HistoriaHeading">
+    <span>Historias</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-historia"
+        [routerLink]="['/historia/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Historia </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="historias?.length === 0">
+    <span>No historias found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="historias && historias.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Fecha</span></th>
+          <th scope="col"><span>Diagnostico</span></th>
+          <th scope="col"><span>Descripcion</span></th>
+          <th scope="col"><span>Resultado File</span></th>
+          <th scope="col"><span>Rut</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let historia of historias; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/historia', historia.id, 'view']">{{ historia.id }}</a>
+          </td>
+          <td>{{ historia.fecha | formatMediumDate }}</td>
+          <td>{{ historia.diagnostico }}</td>
+          <td>{{ historia.descripcion }}</td>
+          <td>{{ historia.resultadoFile }}</td>
+          <td>
+            <div *ngIf="historia.rut">
+              <a [routerLink]="['/paciente', historia.rut?.id, 'view']">{{ historia.rut?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/historia', historia.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/historia', historia.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(historia)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
